@@ -52,7 +52,7 @@ public class GymManager {
                             System.out.println("DOB " + birthDate.toString() + ": must be 18 or older to join!");
                             break;
                         }
-
+                        
                         String stringExpDate = input.nextToken();
                         Date expiryDate =  new Date(stringExpDate);
 
@@ -65,7 +65,7 @@ public class GymManager {
                         String city = input.nextToken();
                         boolean validCity = false;
                         for(Member.Location loc : Member.Location.values()) {
-                            if(loc.toString().equals(city)) {
+                            if(loc.toString().split(", ")[0].equals(city)) {
                                 validCity = true;
                                 cityLoc = loc;
                             }

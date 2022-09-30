@@ -37,7 +37,7 @@ public class MemberDatabase {
         String lname = member.getLname();
         Date dob = member.getDob();
         for(int i=0; i<memberList.length; i++) {
-            if(memberList[i].getFname().equals(fname) && memberList[i].getLname().equals(lname) && memberList[i].getDob().compareTo(dob) == 0) return i;
+            if(memberList[i] != null && memberList[i].getFname().equals(fname) && memberList[i].getLname().equals(lname) && memberList[i].getDob().compareTo(dob) == 0) return i;
         }
         return NOT_FOUND;
     }
