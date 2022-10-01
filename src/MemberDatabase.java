@@ -25,12 +25,30 @@ public class MemberDatabase {
         return this.mlist;
     }
 
+
     /**
      * Finds location of member in mlist
      * @param member of type Member to locate
      * @return index of member in mlist if found, -1 if not found
      */
     private int find(Member member) {
+        Member[] memberList = this.mlist;
+        String fname = member.getFname();
+        String lname = member.getLname();
+        Date dob = member.getDob();
+        for(int i=0; i<memberList.length; i++) {
+            if(memberList[i] != null && memberList[i].getFname().equals(fname) && memberList[i].getLname().equals(lname) && memberList[i].getDob().compareTo(dob) == 0) return i;
+        }
+        return NOT_FOUND;
+    }
+
+    /**
+     * Finds location of member in mlist
+     * @param member of type Member to locate
+     * @return index of member in mlist if found, -1 if not found
+     */
+    //TODO: check if its okay to make another public method so it can be called in gym manager
+    public int findMember(Member member) {
         Member[] memberList = this.mlist;
         String fname = member.getFname();
         String lname = member.getLname();
@@ -127,8 +145,8 @@ public class MemberDatabase {
                 String member1County = member1Location.getCounty();
                 String member2County = member2Location.getCounty();
                 if(member1County.compareTo(member2County) == 0 ) {
-                    //TODO: fix comparison because its a string not an int
-                    if(member1Location.getZip() > member2Location.getZip()) {
+                    //TODO: check if comparison
+                    if(member1Location.getZip().compareTo(member2Location.getZip()) < 0) {
                         minimum = j;
                     }
                 } else if (member1County.compareTo(member2County) > 0) {

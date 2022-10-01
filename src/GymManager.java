@@ -52,7 +52,7 @@ public class GymManager {
                             System.out.println("DOB " + birthDate.toString() + ": must be 18 or older to join!");
                             break;
                         }
-
+                        
                         String stringExpDate = input.nextToken();
                         Date expiryDate =  new Date(stringExpDate);
 
@@ -61,12 +61,13 @@ public class GymManager {
                             break;
                         }
 
+                        Member.Location cityLoc = null;
                         String city = input.nextToken();
                         boolean validCity = false;
                         for(Member.Location loc : Member.Location.values()) {
-                            if(loc.toString().equals(city)) {
+                            if(loc.toString().split(", ")[0].equals(city)) {
                                 validCity = true;
-                                Member.Location cityLoc = loc;
+                                cityLoc = loc;
                             }
                         }
                         if(validCity == false) {
@@ -74,7 +75,7 @@ public class GymManager {
                             break;
                         }
 
-                        Member member = new Member(fname, lname, birthDate, expiryDate, city);
+                        Member member = new Member(fname, lname, birthDate, expiryDate, cityLoc);
                         if(memberDatabase.add(member) == false) {
                             System.out.println(fname + " " + lname + " is already in the database.");
                             break;
@@ -143,12 +144,12 @@ public class GymManager {
                         }
 
                         member = new Member(fname, lname, birthDate);
-                        int memberInd = memberDatabase.find(member);
+                        int memberInd = memberDatabase.findMember(member);
                         if(memberInd == -1) {
                             System.out.println(fname + " " + lname + " is not in the database.");
                             break;
-                        } else if (memberDatabase.getMList()[memberInd].expire.compareTo(new Date()) < 0 ) {
-                            System.out.println(fname + " " + lname + " " + memberDatabase.getMList()[memberInd].expire.toString() + " membership expired.");
+                        } else if (memberDatabase.getMlist()[memberInd].getExpire().compareTo(new Date()) < 0 ) {
+                            System.out.println(fname + " " + lname + " " + memberDatabase.getMlist()[memberInd].getExpire().toString() + " membership expired.");
                             break;
                         }
 
