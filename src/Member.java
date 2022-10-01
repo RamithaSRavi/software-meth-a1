@@ -196,7 +196,7 @@ public class Member implements Comparable<Member>{
     }
 
     private static void testResult(Member member1, Member member2, int expectedOutput, int actualOutput){
-        System.out.println(member1.toString() + " comapresTo(" + member2.toString() + ")");
+        System.out.println(member1.toString() + " comparesTo(" + member2.toString() + ")");
         System.out.print(" returns " + actualOutput);
         if (actualOutput == expectedOutput)
             System.out.println(", PASS.\n");
