@@ -172,7 +172,7 @@ public class GymManager {
                         member = new Member(fname, lname, birthDate);
                         int memberInd = memberDatabase.findMember(member);
                         if(memberInd == -1) {
-                            System.out.println(fname + " " + lname + " is not in the database.");
+                            System.out.println(fname + " " + lname + " " + stringBirthDate + " is not in the database.");
                             break;
                         } else if (memberDatabase.getMlist()[memberInd].getExpire().compareTo(new Date()) < 0 ) {
                             System.out.println(fname + " " + lname + " " + memberDatabase.getMlist()[memberInd].getExpire().toString() + " membership expired.");
@@ -232,6 +232,8 @@ public class GymManager {
                             case "Pilates":
                                 if(this.pilates.checkMemberStatus(member)) {
                                     this.pilates.dropClass(member);
+                                    System.out.println(fname + " " + lname + " dropped " + classType);
+
                                 } else {
                                     System.out.println(fname + " " + lname + " is not a participant in Pilates.");
                                 }
@@ -239,6 +241,7 @@ public class GymManager {
                             case "Spinning":
                                 if(this.spinning.checkMemberStatus(member)) {
                                     this.spinning.dropClass(member);
+                                    System.out.println(fname + " " + lname + " dropped " + classType);
                                 } else {
                                     System.out.println(fname + " " + lname + " is not a participant in Spinning.");
                                 }
@@ -246,12 +249,12 @@ public class GymManager {
                             case "Cardio":
                                 if(this.cardio.checkMemberStatus(member)) {
                                     this.cardio.dropClass(member);
+                                    System.out.println(fname + " " + lname + " dropped " + classType);
                                 } else {
                                     System.out.println(fname + " " + lname + " is not a participant in Cardio.");
                                 }
                                 break;
                         }
-                        System.out.println(fname + " " + lname + " dropped " + classType);
                         break;
                     case "Q":
                         System.out.println("Gym Manager terminated.");
@@ -261,6 +264,7 @@ public class GymManager {
                         System.out.println(command + " is an invalid command!");
                         break;
                 }
+                //TODO: does this correctly add an exception? do we need any more exceptions?
             } catch (Exception e){
                 continue;
             }

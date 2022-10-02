@@ -4,6 +4,7 @@
  */
 
 public class FitnessClass {
+    //TODO: remove unused params
     private String className;
     private String instructor;
     private Time classTime;
@@ -62,16 +63,18 @@ public class FitnessClass {
      * @param member member to check in.
      */
     public void checkIn(Member member) {
-        for(int i=0; i<this.checkedIn.length; i++) {
-            if(this.checkedIn[i] == null) {
-                this.checkedIn[i] = member;
-                if(i+1 >= this.checkedIn.length) {
+        Member[] checkedList = this.checkedIn;
+        for(int i=0; i<checkedList.length; i++) {
+            if(checkedList[i] == null) {
+                checkedList[i] = member;
+                if(i+1 >= checkedList.length) {
                     this.grow();
                 }
                 break;
             }
         }
     }
+
     /**
      * Drop a member from a class.
      * @param member member to drop.
@@ -79,8 +82,8 @@ public class FitnessClass {
     public void dropClass(Member member) {
         for (int i = 0; i < this.checkedIn.length; i++){
             //recopy list without member to delete, put all null to the end
-            if(checkedIn[i].equals(member)){
-                for (int j = i; this.checkedIn[j] != null && j < this.checkedIn.length; j++){
+            if(checkedIn[i] != null && checkedIn[i].equals(member)){
+                for (int j = i; this.checkedIn[j] != null && j < this.checkedIn.length-1; j++){
                     this.checkedIn[j] = this.checkedIn[j + 1];
                 }
                 break;
@@ -95,11 +98,12 @@ public class FitnessClass {
      */
     public String printSchedule() {
         String str = "";
-        for(int i=0; i<this.checkedIn.length; i++) {
-            if(this.checkedIn[i] != null) {
+        Member[] checkedList = this.checkedIn;
+        for(int i=0; i<checkedList.length; i++) {
+            if(checkedList[i] != null) {
                 str += "\n";
                 if(i==0) str += "\t" + "** participants **\n";
-                str += "\t" + "\t" + this.checkedIn[i].toString();
+                str += "\t" + "\t" + checkedList[i].toString();
             }
         }
         return str;
