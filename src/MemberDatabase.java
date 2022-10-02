@@ -36,7 +36,7 @@ public class MemberDatabase {
         String fname = member.getFname();
         String lname = member.getLname();
         Date dob = member.getDob();
-        for(int i=0; i<memberList.length; i++) {
+        for(int i=0; i<size; i++) {
             if(memberList[i] != null && memberList[i].getFname().equals(fname) && memberList[i].getLname().equals(lname) && memberList[i].getDob().compareTo(dob) == 0) return i;
         }
         return NOT_FOUND;
@@ -54,7 +54,7 @@ public class MemberDatabase {
         String lname = member.getLname();
         Date dob = member.getDob();
         for(int i=0; i<memberList.length; i++) {
-            if(memberList[i].getFname().equals(fname) && memberList[i].getLname().equals(lname) && memberList[i].getDob().compareTo(dob) == 0) return i;
+            if(memberList[i] != null && memberList[i].getFname().equals(fname) && memberList[i].getLname().equals(lname) && memberList[i].getDob().compareTo(dob) == 0) return i;
         }
         return NOT_FOUND;
     }
@@ -84,6 +84,7 @@ public class MemberDatabase {
         for(int i=0; i<memberList.length; i++) {
             if(memberList[i] == null) {
                 memberList[i] = member;
+                size++;
                 if(i+1 >= memberList.length) {
                     this.grow();
                 }
@@ -116,6 +117,7 @@ public class MemberDatabase {
                 memberList[index] = null;
                 break;
             }
+            index++;
         }
 
         return true;
@@ -136,17 +138,17 @@ public class MemberDatabase {
      */
     public void printByCounty() {
         Member[] memberList = this.mlist;
+        int minimum = 0;
 
-        for(int i=0; i< memberList.length-1; i++) {
-            Member.Location member1Location = memberList[i].getLocation();
-            int minimum = i;
-            for(int j=i+1; j< memberList.length; j++) {
+        for(int i=0; i< size-1; i++) {
+            minimum = i;
+            for(int j=i+1; j< size; j++) {
                 Member.Location member2Location = memberList[j].getLocation();
+                Member.Location member1Location = memberList[minimum].getLocation();
                 String member1County = member1Location.getCounty();
                 String member2County = member2Location.getCounty();
                 if(member1County.compareTo(member2County) == 0 ) {
-                    //TODO: check if comparison
-                    if(member1Location.getZip().compareTo(member2Location.getZip()) < 0) {
+                    if(member1Location.getZip().compareTo(member2Location.getZip()) > 0) {
                         minimum = j;
                     }
                 } else if (member1County.compareTo(member2County) > 0) {
@@ -168,13 +170,12 @@ public class MemberDatabase {
     public void printByExpirationDate() {
         Member[] memberList = this.mlist;
 
-        for(int i=0; i< memberList.length-1; i++) {
-            Member member1 = memberList[i];
+        for(int i=0; i< size-1; i++) {
             int minExpiryDate = i;
-            for(int j=i+1; j< memberList.length; j++) {
+            for(int j=i+1; j< size; j++) {
+                Member member1 = memberList[minExpiryDate];
                 Member member2 = memberList[j];
-                int compare = member2.getExpire().compareTo(member1.getExpire());
-                if(compare > 0 ) {
+                if(member2.getExpire().compareTo(member1.getExpire()) < 0 ) {
                     minExpiryDate = j;
                 }
             }
@@ -193,13 +194,12 @@ public class MemberDatabase {
     public void printByName() {
         Member[] memberList = this.mlist;
 
-        for(int i=0; i< memberList.length-1; i++) {
+        for(int i=0; i< size-1; i++) {
             int minimum = i;
-            Member member1 = memberList[i];
-            for(int j=i+1; j< memberList.length; j++) {
+            for(int j=i+1; j< size; j++) {
+                Member member1 = memberList[minimum];
                 Member member2 = memberList[j];
-                int compare = member2.compareTo(member1);
-                if(compare > 0 ) {
+                if(member2.compareTo(member1) < 0) {
                     minimum = j;
                 }
             }

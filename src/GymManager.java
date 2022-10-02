@@ -14,9 +14,9 @@ public class GymManager {
      * Default constructor used to instantiate GymManager object.
      */
     public GymManager() {
-        this.pilates = new FitnessClass("Pilates");
-        this.cardio = new FitnessClass("Cardio");
-        this.spinning = new FitnessClass("Spinning");
+        this.pilates = new FitnessClass("PILATES");
+        this.cardio = new FitnessClass("CARDIO");
+        this.spinning = new FitnessClass("SPINNING");
     }
 
     /**
@@ -147,15 +147,15 @@ public class GymManager {
                     case "S":
                         System.out.println("-Fitness classes-");
                         System.out.println("Pilates - JENNIFER 9:30");
-                        System.out.println(this.pilates.printSchedule());
+                        System.out.print(this.pilates.printSchedule());
                         System.out.println("Spinning - DENISE 14:00");
-                        System.out.println(this.spinning.printSchedule());
+                        System.out.print(this.spinning.printSchedule());
                         System.out.println("Cardio - KIM 14:00");
-                        System.out.println(this.cardio.printSchedule());
+                        System.out.print(this.cardio.printSchedule());
                         break;
                     case "C":
                         String classType = input.nextToken();
-                        if(classType.equals("Pilates") || classType.equals("Spinning") || classType.equals("Cardio")) {
+                        if(!(classType.toUpperCase().equals(spinning.getClassName()) || classType.toUpperCase().equals(pilates.getClassName()) || classType.toUpperCase().equals(cardio.getClassName()))) {
                             System.out.println(classType + " class does not exist.");
                             break;
                         }
@@ -172,22 +172,23 @@ public class GymManager {
                         member = new Member(fname, lname, birthDate);
                         int memberInd = memberDatabase.findMember(member);
                         if(memberInd == -1) {
-                            System.out.println(fname + " " + lname + " is not in the database.");
+                            System.out.println(fname + " " + lname + " " + stringBirthDate + " is not in the database.");
                             break;
                         } else if (memberDatabase.getMlist()[memberInd].getExpire().compareTo(new Date()) < 0 ) {
                             System.out.println(fname + " " + lname + " " + memberDatabase.getMlist()[memberInd].getExpire().toString() + " membership expired.");
                             break;
                         }
 
-                        switch(classType) {
-                            case "Pilates":
+                        switch(classType.toUpperCase()) {
+                            case "PILATES":
                                 if(this.pilates.checkMemberStatus(member)) {
                                     System.out.println(fname + " " + lname + " has already checked in Pilates.");
                                     break;
                                 }
                                 this.pilates.checkIn(member);
+                                System.out.println(fname + " " + lname + " checked in " + classType);
                                 break;
-                            case "Spinning":
+                            case "SPINNING":
                                 if(this.spinning.checkMemberStatus(member)) {
                                     System.out.println(fname + " " + lname + " has already checked in Spinning.");
                                     break;
@@ -196,8 +197,9 @@ public class GymManager {
                                     break;
                                 }
                                 this.spinning.checkIn(member);
+                                System.out.println(fname + " " + lname + " checked in " + classType);
                                 break;
-                            case "Cardio":
+                            case "CARDIO":
                                 if(this.cardio.checkMemberStatus(member)) {
                                     System.out.println(fname + " " + lname + " has already checked in Cardio.");
                                     break;
@@ -206,9 +208,9 @@ public class GymManager {
                                     break;
                                 }
                                 this.cardio.checkIn(member);
+                                System.out.println(fname + " " + lname + " checked in " + classType);
                                 break;
                         }
-                        System.out.println(fname + " " + lname + " checked in " + classType);
                         break;
                     case "D":
                         classType = input.nextToken();
@@ -230,6 +232,8 @@ public class GymManager {
                             case "Pilates":
                                 if(this.pilates.checkMemberStatus(member)) {
                                     this.pilates.dropClass(member);
+                                    System.out.println(fname + " " + lname + " dropped " + classType);
+
                                 } else {
                                     System.out.println(fname + " " + lname + " is not a participant in Pilates.");
                                 }
@@ -237,6 +241,7 @@ public class GymManager {
                             case "Spinning":
                                 if(this.spinning.checkMemberStatus(member)) {
                                     this.spinning.dropClass(member);
+                                    System.out.println(fname + " " + lname + " dropped " + classType);
                                 } else {
                                     System.out.println(fname + " " + lname + " is not a participant in Spinning.");
                                 }
@@ -244,12 +249,12 @@ public class GymManager {
                             case "Cardio":
                                 if(this.cardio.checkMemberStatus(member)) {
                                     this.cardio.dropClass(member);
+                                    System.out.println(fname + " " + lname + " dropped " + classType);
                                 } else {
                                     System.out.println(fname + " " + lname + " is not a participant in Cardio.");
                                 }
                                 break;
                         }
-                        System.out.println(fname + " " + lname + " dropped " + classType);
                         break;
                     case "Q":
                         System.out.println("Gym Manager terminated.");
@@ -259,6 +264,7 @@ public class GymManager {
                         System.out.println(command + " is an invalid command!");
                         break;
                 }
+                //TODO: does this correctly add an exception? do we need any more exceptions?
             } catch (Exception e){
                 continue;
             }

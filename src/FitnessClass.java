@@ -4,6 +4,7 @@
  */
 
 public class FitnessClass {
+    //TODO: remove unused params
     private String className;
     private String instructor;
     private Time classTime;
@@ -16,6 +17,14 @@ public class FitnessClass {
     public FitnessClass(String cName) {
         this.checkedIn = new Member[4];
         this.className = cName;
+    }
+
+    /**
+     * Gets the class name of the fitness class object.
+     * @return the class name.
+     */
+    public String getClassName(){
+        return this.className;
     }
 
     public enum Time {
@@ -39,9 +48,11 @@ public class FitnessClass {
      * @return boolean true if member checked in already, false if member did not check in.
      */
     public boolean checkMemberStatus(Member member) {
-        for (Member participant : this.checkedIn){
-            if (member.equals(participant)){
-                return true;
+        for(int i=0; i<this.checkedIn.length; i++) {
+            if(checkedIn[i] != null) {
+                if (member.equals(checkedIn[i])) {
+                    return true;
+                }
             }
         }
         return false;
@@ -52,15 +63,18 @@ public class FitnessClass {
      * @param member member to check in.
      */
     public void checkIn(Member member) {
-        for(int i=0; i<this.checkedIn.length; i++) {
-            if(this.checkedIn[i] == null) {
-                this.checkedIn[i] = member;
-                if(i+1 >= this.checkedIn.length) {
+        Member[] checkedList = this.checkedIn;
+        for(int i=0; i<checkedList.length; i++) {
+            if(checkedList[i] == null) {
+                checkedList[i] = member;
+                if(i+1 >= checkedList.length) {
                     this.grow();
                 }
+                break;
             }
         }
     }
+
     /**
      * Drop a member from a class.
      * @param member member to drop.
@@ -68,8 +82,8 @@ public class FitnessClass {
     public void dropClass(Member member) {
         for (int i = 0; i < this.checkedIn.length; i++){
             //recopy list without member to delete, put all null to the end
-            if(checkedIn[i].equals(member)){
-                for (int j = i; this.checkedIn[j] != null && j < this.checkedIn.length; j++){
+            if(checkedIn[i] != null && checkedIn[i].equals(member)){
+                for (int j = i; this.checkedIn[j] != null && j < this.checkedIn.length-1; j++){
                     this.checkedIn[j] = this.checkedIn[j + 1];
                 }
                 break;
@@ -83,10 +97,14 @@ public class FitnessClass {
      * @return String
      */
     public String printSchedule() {
-        String str = "\t" + "** participants **";
-        for (Member participant : checkedIn){
-            str += "\t" + "\t" + participant.toString();
-            str += "\n";
+        String str = "";
+        Member[] checkedList = this.checkedIn;
+        for(int i=0; i<checkedList.length; i++) {
+            if(checkedList[i] != null) {
+                str += "\n";
+                if(i==0) str += "\t" + "** participants **\n";
+                str += "\t" + "\t" + checkedList[i].toString();
+            }
         }
         return str;
     }
