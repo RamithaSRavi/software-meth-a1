@@ -36,9 +36,22 @@ public class FitnessClass {
             this.hour = hour;
             this.minute = minute;
         }
+
+        /**
+         * Convert an appropriate string into a Time object.
+         * @param time a time in string form, of format "hh:mm".
+         * @return the time object that corresponds to the string.
+         */
         public static Time convertTime(String time) {
-            //TODO: implement
-            return AFTERNOON;
+            if (time == "9:30"){
+                return MORNING;
+            }
+            else if (time == "14:00"){
+                return AFTERNOON;
+            }
+            else {
+                return null;
+            }
         }
     }
 

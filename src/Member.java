@@ -49,7 +49,10 @@ public class Member implements Comparable<Member>{
             this.county = county.toUpperCase();
         }
 
-        //TODO: need to overide the toString method of enum otherwise it returns just the name
+        /**
+         * Converts the location to string form.
+         * @return the location in string form, with city, zip code, and county.
+         */
         @Override
         public String toString(){
             switch(this) {
@@ -135,7 +138,6 @@ public class Member implements Comparable<Member>{
      * number if this member comes alphabetically after the parameter member.
      */
     @Override
-    //TODO: fix magic numbers
     public int compareTo(Member member) {
         if (this.lname.compareTo(member.getLname()) == 0){
             if (this.fname.compareTo(member.getFname()) < 0){

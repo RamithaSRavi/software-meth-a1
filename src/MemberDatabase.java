@@ -1,6 +1,5 @@
 /**
  * The class that stores and organizes all gym member data.
- * More description
  * @author Ramitha Ravishankar, Gloria Liu
  */
 
