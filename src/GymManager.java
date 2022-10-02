@@ -130,34 +130,38 @@ public class GymManager {
                     case "P":
                         if (memberDatabase.getMlist().length == 4){
                             System.out.println("Member database is empty!");
+                        } else {
+                            System.out.println("\n-list of members-");
+                            memberDatabase.print();
+                            System.out.println("-end of list-\n");
                         }
-                        System.out.println("\n-list of members-");
-                        memberDatabase.print();
-                        System.out.println("-end of list-\n");
                         break;
                     case "PC":
                         if (memberDatabase.getMlist().length == 4){
                             System.out.println("Member database is empty!");
+                        } else {
+                            System.out.println("\n-list of members sorted by county and zip code-");
+                            memberDatabase.printByCounty();
+                            System.out.println("-end of list-\n");
                         }
-                        System.out.println("\n-list of members sorted by county and zip code-");
-                        memberDatabase.printByCounty();
-                        System.out.println("-end of list-\n");
                         break;
                     case "PN":
                         if (memberDatabase.getMlist().length == 4){
                             System.out.println("Member database is empty!");
+                        } else {
+                            System.out.println("\n-list of members sorted by last name, and first name-");
+                            memberDatabase.printByName();
+                            System.out.println("-end of list-\n");
                         }
-                        System.out.println("\n-list of members sorted by last name, and first name-");
-                        memberDatabase.printByName();
-                        System.out.println("-end of list-\n");
                         break;
                     case "PD":
                         if (memberDatabase.getMlist().length == 4){
                             System.out.println("Member database is empty!");
+                        } else {
+                            System.out.println("\n-list of members sorted by membership expiration date-");
+                            memberDatabase.printByExpirationDate();
+                            System.out.println("-end of list-\n");
                         }
-                        System.out.println("\n-list of members sorted by membership expiration date-");
-                        memberDatabase.printByExpirationDate();
-                        System.out.println("-end of list-\n");
                         break;
                     case "S":
                         System.out.println("\n-Fitness classes-");

@@ -14,6 +14,9 @@ public class Member implements Comparable<Member>{
 
     public static final String EXPIRED_MEMBERSHIP = "expired ";
     public static final String NOT_EXPIRED_MEMBERSHIP = "expires ";
+    public static final int LESS_THAN = -1;
+    public static final int GREATER_THAN = 1;
+    public static final int EQUAL_TO = 0;
 
     public enum Location {
         BRIDGEWATER ("08807", "SOMERSET"),
@@ -136,21 +139,21 @@ public class Member implements Comparable<Member>{
     public int compareTo(Member member) {
         if (this.lname.compareTo(member.getLname()) == 0){
             if (this.fname.compareTo(member.getFname()) < 0){
-                return -1;
+                return LESS_THAN;
             }
             else if (this.fname.compareTo(member.getFname()) > 0){
-                return 1;
+                return GREATER_THAN;
             }
             else {
-                return 0;
+                return EQUAL_TO;
             }
         }
         else {
             if (this.lname.compareTo(member.getLname()) < 0) {
-                return -1;
+                return LESS_THAN;
             }
             else {
-                return 1;
+                return GREATER_THAN;
             }
         }
     }
