@@ -132,6 +132,7 @@ public class Member implements Comparable<Member>{
      * number if this member comes alphabetically after the parameter member.
      */
     @Override
+    //TODO: fix magic numbers
     public int compareTo(Member member) {
         if (this.lname.compareTo(member.getLname()) == 0){
             if (this.fname.compareTo(member.getFname()) < 0){
