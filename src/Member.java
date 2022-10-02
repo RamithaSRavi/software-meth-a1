@@ -247,7 +247,7 @@ public class Member implements Comparable<Member>{
 
         memberOneDOB = new Date("1/20/2004");
         memberTwoDOB = new Date("1/20/2003");
-        member1 = new Member("John", "Doe", memberOneDOB, memberTwoDOB, Location.PISCATAWAY);
+        member1 = new Member("John", "Doe", memberOneDOB);
         member2 = new Member("John", "Doe", memberTwoDOB);
         expectedOutput = 0;
         actualOutput = member1.compareTo(member2);
