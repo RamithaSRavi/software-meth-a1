@@ -36,7 +36,7 @@ public class MemberDatabase {
         String fname = member.getFname();
         String lname = member.getLname();
         Date dob = member.getDob();
-        for(int i=0; i<memberList.length; i++) {
+        for(int i=0; i<size; i++) {
             if(memberList[i] != null && memberList[i].getFname().equals(fname) && memberList[i].getLname().equals(lname) && memberList[i].getDob().compareTo(dob) == 0) return i;
         }
         return NOT_FOUND;
@@ -117,6 +117,7 @@ public class MemberDatabase {
                 memberList[index] = null;
                 break;
             }
+            index++;
         }
 
         return true;
@@ -147,7 +148,6 @@ public class MemberDatabase {
                 String member1County = member1Location.getCounty();
                 String member2County = member2Location.getCounty();
                 if(member1County.compareTo(member2County) == 0 ) {
-                    //TODO: check if comparison
                     if(member1Location.getZip().compareTo(member2Location.getZip()) > 0) {
                         minimum = j;
                     }

@@ -18,6 +18,14 @@ public class FitnessClass {
         this.className = cName;
     }
 
+    /**
+     * Gets the class name of the fitness class object.
+     * @return the class name.
+     */
+    public String getClassName(){
+        return this.className;
+    }
+
     public enum Time {
         MORNING (9, 30),
         AFTERNOON (14, 0);
@@ -39,9 +47,11 @@ public class FitnessClass {
      * @return boolean true if member checked in already, false if member did not check in.
      */
     public boolean checkMemberStatus(Member member) {
-        for (Member participant : this.checkedIn){
-            if (member.equals(participant)){
-                return true;
+        for(int i=0; i<this.checkedIn.length; i++) {
+            if(checkedIn[i] != null) {
+                if (member.equals(checkedIn[i])) {
+                    return true;
+                }
             }
         }
         return false;
@@ -58,6 +68,7 @@ public class FitnessClass {
                 if(i+1 >= this.checkedIn.length) {
                     this.grow();
                 }
+                break;
             }
         }
     }
@@ -83,10 +94,13 @@ public class FitnessClass {
      * @return String
      */
     public String printSchedule() {
-        String str = "\t" + "** participants **";
-        for (Member participant : checkedIn){
-            str += "\t" + "\t" + participant.toString();
-            str += "\n";
+        String str = "";
+        for(int i=0; i<this.checkedIn.length; i++) {
+            if(this.checkedIn[i] != null) {
+                str += "\n";
+                if(i==0) str += "\t" + "** participants **\n";
+                str += "\t" + "\t" + this.checkedIn[i].toString();
+            }
         }
         return str;
     }
