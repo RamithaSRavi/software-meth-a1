@@ -207,222 +207,231 @@ public class Date implements Comparable<Date> {
         Date date = new Date("2/29/2003");
         boolean expectedOutput = false;
         boolean actualOutput = date.isValid();
-        System.out.println("**Test case #2: a date that has a day > 28 in a" +
-                " February in a non-leap year ");
+        System.out.println("**Test case #1: a date in a non-leap year has only 28 days in February: ");
         testResult(date, expectedOutput, actualOutput);
 
         //Test case 2
         date = new Date("9/2/2022");
         expectedOutput = true;
         actualOutput = date.isValid();
-        System.out.println("**Test case #3: a valid date with a single digit month " +
-                "and single digit day");
+        System.out.println("**Test case #2: a valid date in September: ");
         testResult(date, expectedOutput, actualOutput);
 
         //Test case 3
         date = new Date("3/30/2023");
         expectedOutput = true;
         actualOutput = date.isValid();
-        System.out.println("**Test case #4: a valid date with a month that has 31 days, " +
-                "with date of 30 and a year in the future");
+        System.out.println("**Test case #3: a valid date in March in a future year: ");
         testResult(date, expectedOutput, actualOutput);
 
         //Test case 4
         date = new Date("12/2/2022");
         expectedOutput = true;
         actualOutput = date.isValid();
-        System.out.println("**Test case #5: a valid date with a double digit month " +
-                "and a single digit day, with a valid year.");
+        System.out.println("**Test case #4: a valid date in December, in the future: ");
         testResult(date, expectedOutput, actualOutput);
 
         //Test case 5
         date = new Date("1/20/2004");
         expectedOutput = true;
         actualOutput = date.isValid();
-        System.out.println("**Test case #6: a valid date with a single digit month " +
-                "and a double digit day, with a valid year.");
+        System.out.println("**Test case #5: a valid date in January: ");
         testResult(date, expectedOutput, actualOutput);
 
         //Test case 6
         date = new Date("12/20/2004");
         expectedOutput = true;
         actualOutput = date.isValid();
-        System.out.println("**Test case #7: a valid date with a double digit month " +
-                "and a double digit day, with a valid year.");
+        System.out.println("**Test case #6: a valid date in December: ");
         testResult(date, expectedOutput, actualOutput);
 
         //Test case 7
         date = new Date("4/31/2003");
         expectedOutput = false;
         actualOutput = date.isValid();
-        System.out.println("**Test case #8: an invalid date because the month only has " +
-                "30 days but it has a date of 31, valid year");
+        System.out.println("**Test case #7: a date with an invalid day value for April: ");
         testResult(date, expectedOutput, actualOutput);
 
         //Test case 8
         date = new Date("13/31/2003");
         expectedOutput = false;
         actualOutput = date.isValid();
-        System.out.println("**Test case #9: a valid date with a double digit month " +
-                "and a double digit day, with a valid year.");
+        System.out.println("**Test case #8: a date with an invalid month value: ");
         testResult(date, expectedOutput, actualOutput);
 
         //Test case 9
-        date = new Date("13/31/2003");
+        date = new Date("5/3/2/2003");
         expectedOutput = false;
         actualOutput = date.isValid();
-        System.out.println("**Test case #9: a valid date with a double digit month " +
-                "and a double digit day, with a valid year.");
+        System.out.println("**Test case #9: a date with the an incorrect parameter input: ");
         testResult(date, expectedOutput, actualOutput);
 
         //Test case 10
         date = new Date("3/32/2003");
         expectedOutput = false;
         actualOutput = date.isValid();
+        System.out.println("**Test case #10: a date with an invalid day value: ");
         testResult(date, expectedOutput, actualOutput);
 
         //Test case 11
         date = new Date("-1/31/2003");
         expectedOutput = false;
         actualOutput = date.isValid();
+        System.out.println("**Test case #11: a date with an invalid month value: ");
         testResult(date, expectedOutput, actualOutput);
 
         //Test case 12
         date = new Date("4/3/2003");
         expectedOutput = true;
         actualOutput = date.isValid();
+        System.out.println("**Test case #12: a valid date in the past: ");
         testResult(date, expectedOutput, actualOutput);
 
         //Test case 13
         date = new Date("4/31/2022");
         expectedOutput = false;
         actualOutput = date.isValid();
+        System.out.println("**Test case #13: a date with an invalid day value: ");
         testResult(date, expectedOutput, actualOutput);
 
         //Test case 14
         date = new Date("2/30/2011");
         expectedOutput = false;
         actualOutput = date.isValid();
+        System.out.println("**Test case #14: a date in a non-leap year should only have 28 days in February: ");
         testResult(date, expectedOutput, actualOutput);
 
         //Test case 15
         date = new Date("1/20/2003");
         expectedOutput = true;
         actualOutput = date.isValid();
+        System.out.println("**Test case #15: a valid date in January: ");
         testResult(date, expectedOutput, actualOutput);
 
         //Test case 16
         date = new Date("3/30/2021");
         expectedOutput = true;
         actualOutput = date.isValid();
+        System.out.println("**Test case #16: a valid date in March: ");
         testResult(date, expectedOutput, actualOutput);
 
         //Test case 17
-        date = new Date("3/30/2023");
-        expectedOutput = true;
-        actualOutput = date.isValid();
-        testResult(date, expectedOutput, actualOutput);
-
-        //Test case 18
         date = new Date("5/1/1996");
         expectedOutput = true;
         actualOutput = date.isValid();
+        System.out.println("**Test case #17: a valid date in a year <2000: ");
         testResult(date, expectedOutput, actualOutput);
 
-        //Test case 19
+        //Test case 18
         date = new Date("3/31/1990");
         expectedOutput = true;
         actualOutput = date.isValid();
+        System.out.println("**Test case #18: a valid date in March: ");
         testResult(date, expectedOutput, actualOutput);
 
-        //Test case 20
+        //Test case 19
         date = new Date("6/30/2023");
         expectedOutput = true;
         actualOutput = date.isValid();
+        System.out.println("**Test case #19: a valid date in June in the future: ");
         testResult(date, expectedOutput, actualOutput);
 
-        //Test case 21
+        //Test case 20
         date = new Date("12/1/1989");
         expectedOutput = true;
         actualOutput = date.isValid();
+        System.out.println("**Test case #20: a valid date in December in a year < 2000: ");
         testResult(date, expectedOutput, actualOutput);
 
-        //Test case 22
+        //Test case 21
         date = new Date("5/31/2023");
         expectedOutput = true;
         actualOutput = date.isValid();
+        System.out.println("**Test case #21: a valid date in May in the future: ");
         testResult(date, expectedOutput, actualOutput);
 
-        //Test case 23
+        //Test case 22
         date = new Date("2/29/2000");
         expectedOutput = true;
         actualOutput = date.isValid();
+        System.out.println("**Test case #22: a date in a leap year has 29 days in February: ");
         testResult(date, expectedOutput, actualOutput);
 
-        //Test case 24
+        //Test case 23
         date = new Date("9/30/2023");
         expectedOutput = true;
         actualOutput = date.isValid();
+        System.out.println("**Test case #23: a valid date in September: ");
         testResult(date, expectedOutput, actualOutput);
 
-        //Test case 25
+        //Test case 24
         date = new Date("8/8/1977");
         expectedOutput = true;
         actualOutput = date.isValid();
+        System.out.println("**Test case #24: a valid date with the same day and month values: ");
         testResult(date, expectedOutput, actualOutput);
 
-        //Test case 26
+        //Test case 25
         date = new Date("9/30/2020");
         expectedOutput = true;
         actualOutput = date.isValid();
+        System.out.println("**Test case #25: a valid date in September: ");
         testResult(date, expectedOutput, actualOutput);
 
-        //Test case 27
+        //Test case 26
         date = new Date("9/9/1977");
         expectedOutput = true;
         actualOutput = date.isValid();
+        System.out.println("**Test case #26: a valid date with the same day and month values: ");
         testResult(date, expectedOutput, actualOutput);
 
-        //Test case 28
+        //Test case 27
         date = new Date("7/15/1977");
         expectedOutput = true;
         actualOutput = date.isValid();
+        System.out.println("**Test case #27: a valid date in July: ");
         testResult(date, expectedOutput, actualOutput);
 
-        //Test case 29
+        //Test case 28
         date = new Date("12/31/2023");
         expectedOutput = true;
         actualOutput = date.isValid();
+        System.out.println("**Test case #28: December has 31 days: ");
         testResult(date, expectedOutput, actualOutput);
 
-        //Test case 30
+        //Test case 29
         date = new Date("10/7/1991");
         expectedOutput = true;
         actualOutput = date.isValid();
+        System.out.println("**Test case #29: a valid date in October: ");
         testResult(date, expectedOutput, actualOutput);
 
-        //Test case 31
+        //Test case 30
         date = new Date("3/31/2023");
         expectedOutput = true;
         actualOutput = date.isValid();
+        System.out.println("**Test case #30: March has 31 days: ");
         testResult(date, expectedOutput, actualOutput);
 
-        //Test case 32
+        //Test case 31
         date = new Date("5/1/1999");
         expectedOutput = true;
         actualOutput = date.isValid();
+        System.out.println("**Test case #31: the day value can be at least 1: ");
         testResult(date, expectedOutput, actualOutput);
 
-        //Test case 33
+        //Test case 32
         date = new Date("1/31/2023");
         expectedOutput = true;
         actualOutput = date.isValid();
+        System.out.println("**Test case #32: January has 31 days: ");
         testResult(date, expectedOutput, actualOutput);
 
-        //Test case 34
+        //Test case 33
         date = new Date("11/21/800");
         expectedOutput = false;
         actualOutput = date.isValid();
+        System.out.println("**Test case #33: year values should be >1900: ");
         testResult(date, expectedOutput, actualOutput);
     }
 

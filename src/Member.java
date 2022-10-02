@@ -134,10 +134,23 @@ public class Member implements Comparable<Member>{
     @Override
     public int compareTo(Member member) {
         if (this.lname.compareTo(member.getLname()) == 0){
-            return (this.fname.compareTo(member.getFname()));
+            if (this.fname.compareTo(member.getFname()) < 0){
+                return -1;
+            }
+            else if (this.fname.compareTo(member.getFname()) > 0){
+                return 1;
+            }
+            else {
+                return 0;
+            }
         }
         else {
-            return (this.lname.compareTo(member.getLname()));
+            if (this.lname.compareTo(member.getLname()) < 0) {
+                return -1;
+            }
+            else {
+                return 1;
+            }
         }
     }
 
@@ -189,14 +202,33 @@ public class Member implements Comparable<Member>{
         Date memberTwoDOB = new Date("8/8/1977");
         Member member1 = new Member("Roy", "Brooks", memberOneDOB);
         Member member2 = new Member("Roy", "Brooks", memberTwoDOB);
-        int expectedOutput = -1;
+        int expectedOutput = 0;
         int actualOutput = member1.compareTo(member2);
-        System.out.println("**Test Case 1: ");
+        System.out.println("**Test Case 1: Two members with the same first and last names: ");
+        testResult(member1, member2, expectedOutput, actualOutput);
+
+        memberOneDOB = new Date("9/9/1977");
+        memberTwoDOB = new Date("10/7/1977");
+        member1 = new Member("Roy", "Brooks", memberOneDOB);
+        member2 = new Member("Carl", "Brown", memberTwoDOB);
+        expectedOutput = -1;
+        actualOutput = member1.compareTo(member2);
+        System.out.println("**Test Case 2: Members should be sorted by last name first: ");
+        testResult(member1, member2, expectedOutput, actualOutput);
+
+        memberOneDOB = new Date("10/7/1977");
+        memberTwoDOB = new Date("9/9/1977");
+        member1 = new Member("Carl", "Brown", memberOneDOB);
+        member2 = new Member("Roy", "Brooks", memberTwoDOB);
+        expectedOutput = 1;
+        actualOutput = member1.compareTo(member2);
+        System.out.println("**Test Case 3: Members should be sorted by last name first: ");
         testResult(member1, member2, expectedOutput, actualOutput);
     }
 
     private static void testResult(Member member1, Member member2, int expectedOutput, int actualOutput){
-        System.out.println(member1.toString() + " comparesTo(" + member2.toString() + ")");
+        System.out.println(member1.getFname() + " " + member1.getLname() + " comparesTo("
+                + member2.getFname() + " " + member2.getLname() + ")");
         System.out.print(" returns " + actualOutput);
         if (actualOutput == expectedOutput)
             System.out.println(", PASS.\n");
