@@ -193,7 +193,6 @@ public class MemberDatabase {
      */
     public void printByName() {
         Member[] memberList = this.mlist;
-
         for(int i=0; i< size-1; i++) {
             int minimum = i;
             for(int j=i+1; j< size; j++) {
@@ -208,7 +207,6 @@ public class MemberDatabase {
             memberList[i] = memberList[minimum];
             memberList[minimum] = temp;
         }
-
         this.print();
     }
 }

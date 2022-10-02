@@ -101,9 +101,8 @@ public class FitnessClass {
         Member[] checkedList = this.checkedIn;
         for(int i=0; i<checkedList.length; i++) {
             if(checkedList[i] != null) {
-                str += "\n";
-                if(i==0) str += "\t" + "** participants **\n";
-                str += "\t" + "\t" + checkedList[i].toString();
+                if(i==0) str += "\t" + "** participants **";
+                str += "\n" + "\t" + "\t" + checkedList[i].toString();
             }
         }
         return str;

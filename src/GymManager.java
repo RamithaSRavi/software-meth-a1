@@ -31,6 +31,9 @@ public class GymManager {
 
         while(runProgram) {
             String line = sc.nextLine();
+            if (line.isEmpty()){
+                System.out.println();
+            }
             try {
                 StringTokenizer input = new StringTokenizer(line, " ");
                 String command = input.nextToken();
@@ -125,33 +128,57 @@ public class GymManager {
 
                         break;
                     case "P":
-                        System.out.println("-list of members-");
+                        if (memberDatabase.getMlist().length == 4){
+                            System.out.println("Member database is empty!");
+                        }
+                        System.out.println("\n-list of members-");
                         memberDatabase.print();
-                        System.out.println("-end of list-");
+                        System.out.println("-end of list-\n");
                         break;
                     case "PC":
-                        System.out.println("-list of members sorted by county and zip code-");
+                        if (memberDatabase.getMlist().length == 4){
+                            System.out.println("Member database is empty!");
+                        }
+                        System.out.println("\n-list of members sorted by county and zip code-");
                         memberDatabase.printByCounty();
-                        System.out.println("-end of list-");
+                        System.out.println("-end of list-\n");
                         break;
                     case "PN":
-                        System.out.println("-list of members sorted by last name, and first name-");
+                        if (memberDatabase.getMlist().length == 4){
+                            System.out.println("Member database is empty!");
+                        }
+                        System.out.println("\n-list of members sorted by last name, and first name-");
                         memberDatabase.printByName();
-                        System.out.println("-end of list-");
+                        System.out.println("-end of list-\n");
                         break;
                     case "PD":
-                        System.out.println("-list of members sorted by membership expiration date-");
+                        if (memberDatabase.getMlist().length == 4){
+                            System.out.println("Member database is empty!");
+                        }
+                        System.out.println("\n-list of members sorted by membership expiration date-");
                         memberDatabase.printByExpirationDate();
-                        System.out.println("-end of list-");
+                        System.out.println("-end of list-\n");
                         break;
                     case "S":
-                        System.out.println("-Fitness classes-");
+                        System.out.println("\n-Fitness classes-");
                         System.out.println("Pilates - JENNIFER 9:30");
                         System.out.print(this.pilates.printSchedule());
+                        if (!this.pilates.printSchedule().equals("")){
+                            System.out.println();
+                        }
                         System.out.println("Spinning - DENISE 14:00");
                         System.out.print(this.spinning.printSchedule());
+                        if (!this.pilates.printSchedule().equals("")){
+                            System.out.println();
+                        }
                         System.out.println("Cardio - KIM 14:00");
+                        if (this.cardio.printSchedule().equals("")){
+                            System.out.println();
+                        }
                         System.out.print(this.cardio.printSchedule());
+                        if (!this.cardio.printSchedule().equals("")){
+                            System.out.println("\n");
+                        }
                         break;
                     case "C":
                         String classType = input.nextToken();
@@ -177,6 +204,8 @@ public class GymManager {
                         } else if (memberDatabase.getMlist()[memberInd].getExpire().compareTo(new Date()) < 0 ) {
                             System.out.println(fname + " " + lname + " " + memberDatabase.getMlist()[memberInd].getExpire().toString() + " membership expired.");
                             break;
+                        } else {
+                            member = memberDatabase.getMlist()[memberInd];
                         }
 
                         switch(classType.toUpperCase()) {
@@ -186,7 +215,7 @@ public class GymManager {
                                     break;
                                 }
                                 this.pilates.checkIn(member);
-                                System.out.println(fname + " " + lname + " checked in " + classType);
+                                System.out.println(fname + " " + lname + " checked in Pilates.");
                                 break;
                             case "SPINNING":
                                 if(this.spinning.checkMemberStatus(member)) {
@@ -197,7 +226,7 @@ public class GymManager {
                                     break;
                                 }
                                 this.spinning.checkIn(member);
-                                System.out.println(fname + " " + lname + " checked in " + classType);
+                                System.out.println(fname + " " + lname + " checked in Spinning.");
                                 break;
                             case "CARDIO":
                                 if(this.cardio.checkMemberStatus(member)) {
@@ -208,7 +237,7 @@ public class GymManager {
                                     break;
                                 }
                                 this.cardio.checkIn(member);
-                                System.out.println(fname + " " + lname + " checked in " + classType);
+                                System.out.println(fname + " " + lname + " checked in Cardio.");
                                 break;
                         }
                         break;
@@ -232,7 +261,7 @@ public class GymManager {
                             case "Pilates":
                                 if(this.pilates.checkMemberStatus(member)) {
                                     this.pilates.dropClass(member);
-                                    System.out.println(fname + " " + lname + " dropped " + classType);
+                                    System.out.println(fname + " " + lname + " dropped " + classType + ".");
 
                                 } else {
                                     System.out.println(fname + " " + lname + " is not a participant in Pilates.");
@@ -241,7 +270,7 @@ public class GymManager {
                             case "Spinning":
                                 if(this.spinning.checkMemberStatus(member)) {
                                     this.spinning.dropClass(member);
-                                    System.out.println(fname + " " + lname + " dropped " + classType);
+                                    System.out.println(fname + " " + lname + " dropped " + classType + ".");
                                 } else {
                                     System.out.println(fname + " " + lname + " is not a participant in Spinning.");
                                 }
@@ -249,7 +278,7 @@ public class GymManager {
                             case "Cardio":
                                 if(this.cardio.checkMemberStatus(member)) {
                                     this.cardio.dropClass(member);
-                                    System.out.println(fname + " " + lname + " dropped " + classType);
+                                    System.out.println(fname + " " + lname + " dropped " + classType + ".");
                                 } else {
                                     System.out.println(fname + " " + lname + " is not a participant in Cardio.");
                                 }
