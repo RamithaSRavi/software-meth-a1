@@ -130,7 +130,7 @@ public class Member implements Comparable<Member>{
      * Compares this member to another member, to see who should come first
      * alphabetically by first looking at last name then first name.
      * @param member the other member this member is compared with.
-     * @return 0 if the first & last are equal, a negative number if this member
+     * @return 0 if the first and last name are equal, a negative number if this member
      * is alphabetically in front of the member in the parameter, and a positive
      * number if this member comes alphabetically after the parameter member.
      */
