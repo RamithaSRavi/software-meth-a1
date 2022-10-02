@@ -127,7 +127,7 @@ public class MemberDatabase {
     public void print() {
         Member[] memberList = this.mlist;
         for(int i=0; i< memberList.length; i++) {
-            if(memberList[i] != null) System.out.println(memberList[i]);
+            if(memberList[i] != null) System.out.println(memberList[i].toString());
         }
     }
 

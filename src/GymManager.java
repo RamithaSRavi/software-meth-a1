@@ -51,6 +51,16 @@ public class GymManager {
                         }else if(todayDate.getYear() - birthDate.getYear() < 18) {
                             System.out.println("DOB " + birthDate.toString() + ": must be 18 or older to join!");
                             break;
+                        }else if (todayDate.getYear() - birthDate.getYear() == 18){
+                            if (todayDate.getMonth() - birthDate.getMonth() < 0){
+                                System.out.println("DOB " + birthDate.toString() + ": must be 18 or older to join!");
+                                break;
+                            }
+                            if (todayDate.getMonth() - birthDate.getMonth() == 0
+                            && todayDate.getDay() - birthDate.getDay() < 0){
+                                System.out.println("DOB " + birthDate.toString() + ": must be 18 or older to join!");
+                                break;
+                            }
                         }
                         
                         String stringExpDate = input.nextToken();
@@ -62,14 +72,30 @@ public class GymManager {
                         }
 
                         Member.Location cityLoc = null;
-                        String city = input.nextToken();
+                        String city = input.nextToken().toUpperCase();
                         boolean validCity = false;
-                        for(Member.Location loc : Member.Location.values()) {
+                        if (city.equals("PISCATAWAY")){
+                            validCity = true;
+                            cityLoc = Member.Location.PISCATAWAY;
+                        } else if (city.equals("BRIDGEWATER")){
+                            validCity = true;
+                            cityLoc = Member.Location.BRIDGEWATER;
+                        } else if (city.equals("EDISON")){
+                            validCity = true;
+                            cityLoc = Member.Location.EDISON;
+                        } else if (city.equals("SOMERVILLE")){
+                            validCity = true;
+                            cityLoc = Member.Location.SOMERVILLE;
+                        } else if (city.equals("FRANKLIN")){
+                            validCity = true;
+                            cityLoc = Member.Location.FRANKLIN;
+                        }
+                        /*for(Member.Location loc : Member.Location.values()) {
                             if(loc.toString().split(", ")[0].equals(city)) {
                                 validCity = true;
                                 cityLoc = loc;
                             }
-                        }
+                        }*/
                         if(validCity == false) {
                             System.out.println(city + ": invalid location!");
                             break;
@@ -205,25 +231,25 @@ public class GymManager {
                                 if(this.pilates.checkMemberStatus(member)) {
                                     this.pilates.dropClass(member);
                                 } else {
-                                    System.out.println(fname + lname + " is not a participant in Pilates.");
+                                    System.out.println(fname + " " + lname + " is not a participant in Pilates.");
                                 }
                                 break;
                             case "Spinning":
                                 if(this.spinning.checkMemberStatus(member)) {
                                     this.spinning.dropClass(member);
                                 } else {
-                                    System.out.println(fname + lname + " is not a participant in Spinning.");
+                                    System.out.println(fname + " " + lname + " is not a participant in Spinning.");
                                 }
                                 break;
                             case "Cardio":
                                 if(this.cardio.checkMemberStatus(member)) {
                                     this.cardio.dropClass(member);
                                 } else {
-                                    System.out.println(fname + lname + " is not a participant in Cardio.");
+                                    System.out.println(fname + " " + lname + " is not a participant in Cardio.");
                                 }
                                 break;
                         }
-                        System.out.println(fname + lname + " dropped " + classType);
+                        System.out.println(fname + " " + lname + " dropped " + classType);
                         break;
                     case "Q":
                         System.out.println("Gym Manager terminated.");

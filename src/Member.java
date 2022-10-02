@@ -16,11 +16,11 @@ public class Member implements Comparable<Member>{
     public static final String NOT_EXPIRED_MEMBERSHIP = "expires ";
 
     public enum Location {
-        BRIDGEWATER ("08807", "Somerset"),
-        EDISON ("08837", "Middlesex"),
-        FRANKLIN ("08873", "Somerset"),
-        PISCATAWAY ("08854", "Middlesex"),
-        SOMERVILLE ("08876", "Somerset");
+        BRIDGEWATER ("08807", "SOMERSET"),
+        EDISON ("08837", "MIDDLESEX"),
+        FRANKLIN ("08873", "SOMERSET"),
+        PISCATAWAY ("08854", "MIDDLESEX"),
+        SOMERVILLE ("08876", "SOMERSET");
 
         private final String zip;
         private final String county;
@@ -43,7 +43,7 @@ public class Member implements Comparable<Member>{
 
         Location(String zip, String county) {
             this.zip = zip;
-            this.county = county;
+            this.county = county.toUpperCase();
         }
 
         //TODO: need to overide the toString method of enum otherwise it returns just the name
@@ -224,6 +224,36 @@ public class Member implements Comparable<Member>{
         actualOutput = member1.compareTo(member2);
         System.out.println("**Test Case 3: Members should be sorted by last name first: ");
         testResult(member1, member2, expectedOutput, actualOutput);
+
+        memberOneDOB = new Date("5/1/1996");
+        memberTwoDOB = new Date("1/20/2003");
+        member1 = new Member("Jane", "Doe", memberOneDOB);
+        member2 = new Member("John", "Doe", memberTwoDOB);
+        expectedOutput = -1;
+        actualOutput = member1.compareTo(member2);
+        System.out.println("**Test Case 4: If members have the same last name, " +
+                "they should be sorted alphabetically by first name");
+        testResult(member1, member2, expectedOutput, actualOutput);
+
+        memberOneDOB = new Date("1/20/2004");
+        memberTwoDOB = new Date("5/1/1996");
+        member1 = new Member("John", "Doe", memberOneDOB);
+        member2 = new Member("Jane", "Doe", memberTwoDOB);
+        expectedOutput = 1;
+        actualOutput = member1.compareTo(member2);
+        System.out.println("**Test Case 5: If members have the same last name, " +
+                "they should be sorted alphabetically by first name");
+        testResult(member1, member2, expectedOutput, actualOutput);
+
+        memberOneDOB = new Date("1/20/2004");
+        memberTwoDOB = new Date("1/20/2003");
+        member1 = new Member("John", "Doe", memberOneDOB, memberTwoDOB, Location.PISCATAWAY);
+        member2 = new Member("John", "Doe", memberTwoDOB);
+        expectedOutput = 0;
+        actualOutput = member1.compareTo(member2);
+        System.out.println("**Test Case 6: Two members with the same first name and last name: ");
+        testResult(member1, member2, expectedOutput, actualOutput);
+        System.out.println(member1.toString());
     }
 
     private static void testResult(Member member1, Member member2, int expectedOutput, int actualOutput){
