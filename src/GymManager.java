@@ -13,9 +13,9 @@ public class GymManager {
      * Default constructor used to instantiate GymManager object.
      */
     public GymManager() {
-        this.pilates = new FitnessClass("PILATES");
-        this.cardio = new FitnessClass("CARDIO");
-        this.spinning = new FitnessClass("SPINNING");
+        this.pilates = new FitnessClass("PILATES", "Jennifer", "9:30");
+        this.cardio = new FitnessClass("CARDIO", "Kim", "14:00");
+        this.spinning = new FitnessClass("SPINNING", "Denise", "14:00");
     }
 
     /**
@@ -164,24 +164,10 @@ public class GymManager {
                         break;
                     case "S":
                         System.out.println("\n-Fitness classes-");
-                        System.out.println("Pilates - JENNIFER 9:30");
-                        System.out.print(this.pilates.printSchedule());
-                        if (!this.pilates.printSchedule().equals("")){
-                            System.out.println();
-                        }
-                        System.out.println("Spinning - DENISE 14:00");
-                        System.out.print(this.spinning.printSchedule());
-                        if (!this.pilates.printSchedule().equals("")){
-                            System.out.println();
-                        }
-                        System.out.println("Cardio - KIM 14:00");
-                        if (this.cardio.printSchedule().equals("")){
-                            System.out.println();
-                        }
-                        System.out.print(this.cardio.printSchedule());
-                        if (!this.cardio.printSchedule().equals("")){
-                            System.out.println("\n");
-                        }
+                        System.out.println(this.pilates.printSchedule());
+                        System.out.println(this.spinning.printSchedule());
+                        System.out.println(this.cardio.printSchedule());
+                        System.out.println();
                         break;
                     case "C":
                         String classType = input.nextToken();
