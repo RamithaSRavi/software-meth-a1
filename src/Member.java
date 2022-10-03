@@ -14,6 +14,9 @@ public class Member implements Comparable<Member>{
 
     public static final String EXPIRED_MEMBERSHIP = "expired ";
     public static final String NOT_EXPIRED_MEMBERSHIP = "expires ";
+    public static final int LESS_THAN = -1;
+    public static final int GREATER_THAN = 1;
+    public static final int EQUAL_TO = 0;
 
     public enum Location {
         BRIDGEWATER ("08807", "SOMERSET"),
@@ -46,7 +49,10 @@ public class Member implements Comparable<Member>{
             this.county = county.toUpperCase();
         }
 
-        //TODO: need to overide the toString method of enum otherwise it returns just the name
+        /**
+         * Converts the location to string form.
+         * @return the location in string form, with city, zip code, and county.
+         */
         @Override
         public String toString(){
             switch(this) {
@@ -127,30 +133,29 @@ public class Member implements Comparable<Member>{
      * Compares this member to another member, to see who should come first
      * alphabetically by first looking at last name then first name.
      * @param member the other member this member is compared with.
-     * @return 0 if the first & last are equal, a negative number if this member
+     * @return 0 if the first and last name are equal, a negative number if this member
      * is alphabetically in front of the member in the parameter, and a positive
      * number if this member comes alphabetically after the parameter member.
      */
     @Override
-    //TODO: fix magic numbers
     public int compareTo(Member member) {
         if (this.lname.compareTo(member.getLname()) == 0){
             if (this.fname.compareTo(member.getFname()) < 0){
-                return -1;
+                return LESS_THAN;
             }
             else if (this.fname.compareTo(member.getFname()) > 0){
-                return 1;
+                return GREATER_THAN;
             }
             else {
-                return 0;
+                return EQUAL_TO;
             }
         }
         else {
             if (this.lname.compareTo(member.getLname()) < 0) {
-                return -1;
+                return LESS_THAN;
             }
             else {
-                return 1;
+                return GREATER_THAN;
             }
         }
     }
@@ -237,24 +242,87 @@ public class Member implements Comparable<Member>{
         testResult(member1, member2, expectedOutput, actualOutput);
 
         memberOneDOB = new Date("1/20/2004");
-        memberTwoDOB = new Date("5/1/1996");
-        member1 = new Member("John", "Doe", memberOneDOB);
-        member2 = new Member("Jane", "Doe", memberTwoDOB);
-        expectedOutput = 1;
-        actualOutput = member1.compareTo(member2);
-        System.out.println("**Test Case 5: If members have the same last name, " +
-                "they should be sorted alphabetically by first name");
-        testResult(member1, member2, expectedOutput, actualOutput);
-
-        memberOneDOB = new Date("1/20/2004");
         memberTwoDOB = new Date("1/20/2003");
-        member1 = new Member("John", "Doe", memberOneDOB, memberTwoDOB, Location.PISCATAWAY);
+        member1 = new Member("John", "Doe", memberOneDOB);
         member2 = new Member("John", "Doe", memberTwoDOB);
         expectedOutput = 0;
         actualOutput = member1.compareTo(member2);
-        System.out.println("**Test Case 6: Two members with the same first name and last name: ");
+        System.out.println("**Test Case 5: Two members with the same first name and last name: ");
         testResult(member1, member2, expectedOutput, actualOutput);
-        System.out.println(member1.toString());
+
+        memberOneDOB = new Date("2/29/2000");
+        memberTwoDOB = new Date("9/9/1997");
+        member1 = new Member("Duke", "Ellington", memberOneDOB);
+        member2 = new Member("Roy", "Brooks", memberTwoDOB);
+        expectedOutput = 1;
+        actualOutput = member1.compareTo(member2);
+        System.out.println("**Test Case 6: Members should be sorted by last name: ");
+        testResult(member1, member2, expectedOutput, actualOutput);
+
+        memberOneDOB = new Date("7/15/1977");
+        memberTwoDOB = new Date("2/29/2000");
+        member1 = new Member("Kate", "Lindsey", memberOneDOB);
+        member2 = new Member("Duke", "Ellington", memberTwoDOB);
+        expectedOutput = 1;
+        actualOutput = member1.compareTo(member2);
+        System.out.println("**Test Case 7: Members should be sorted by last name: ");
+        testResult(member1, member2, expectedOutput, actualOutput);
+
+        memberOneDOB = new Date("7/15/1997");
+        memberTwoDOB = new Date("12/1/1989");
+        member1 = new Member("Kate", "Lindsey", memberOneDOB);
+        member2 = new Member("Mary", "Lindsey", memberTwoDOB);
+        expectedOutput = -1;
+        actualOutput = member1.compareTo(member2);
+        System.out.println("**Test Case 8: If members have the same last name, " +
+                "they should be sorted alphabetically by first name");
+        testResult(member1, member2, expectedOutput, actualOutput);
+
+        memberOneDOB = new Date("12/1/1989");
+        memberTwoDOB = new Date("7/15/1997");
+        member1 = new Member("Mary", "Lindsey", memberOneDOB);
+        member2 = new Member("Kate", "Lindsey", memberTwoDOB);
+        expectedOutput = 1;
+        actualOutput = member1.compareTo(member2);
+        System.out.println("**Test Case 9: If members have the same last name, " +
+                "they should be sorted alphabetically by first name");
+        testResult(member1, member2, expectedOutput, actualOutput);
+
+        memberOneDOB = new Date("12/1/1989");
+        memberTwoDOB = new Date("3/31/1990");
+        member1 = new Member("Mary", "Lindsey", memberOneDOB);
+        member2 = new Member("April", "March", memberTwoDOB);
+        expectedOutput = -1;
+        actualOutput = member1.compareTo(member2);
+        System.out.println("**Test Case 10: Members should be sorted by last name: ");
+        testResult(member1, member2, expectedOutput, actualOutput);
+
+        memberOneDOB = new Date("3/31/1990");
+        memberTwoDOB = new Date("12/1/1989");
+        member1 = new Member("April", "March", memberOneDOB);
+        member2 = new Member("Mary", "Lindsey", memberTwoDOB);
+        expectedOutput = 1;
+        actualOutput = member1.compareTo(member2);
+        System.out.println("**Test Case 11: Members should be sorted by last name: ");
+        testResult(member1, member2, expectedOutput, actualOutput);
+
+        memberOneDOB = new Date("1/31/2023");
+        memberTwoDOB = new Date("3/31/1990");
+        member1 = new Member("Bill", "Scanlan", memberOneDOB);
+        member2 = new Member("April", "March", memberTwoDOB);
+        expectedOutput = 1;
+        actualOutput = member1.compareTo(member2);
+        System.out.println("**Test Case 12: Members should be sorted by last name: ");
+        testResult(member1, member2, expectedOutput, actualOutput);
+
+        memberOneDOB = new Date("3/31/1990");
+        memberTwoDOB = new Date("5/1/1999");
+        member1 = new Member("Paul", "Siegel", memberOneDOB);
+        member2 = new Member("Bill", "Scanlan", memberTwoDOB);
+        expectedOutput = 1;
+        actualOutput = member1.compareTo(member2);
+        System.out.println("**Test Case 13: Members should be sorted by last name: ");
+        testResult(member1, member2, expectedOutput, actualOutput);
     }
 
     private static void testResult(Member member1, Member member2, int expectedOutput, int actualOutput){

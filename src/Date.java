@@ -34,6 +34,9 @@ public class Date implements Comparable<Date> {
     public static final int FEB_LEAP_YEAR_DAYS = 29;
     public static final int FEB_NON_LEAP_YEAR_DAYS = 28;
     public static final int MIN_YEAR = 1900;
+    public static final int LESS_THAN = -1;
+    public static final int GREATER_THAN = 1;
+    public static final int EQUAL_TO = 0;
 
     /**
      * Default constructor which creates a date object with the current date.
@@ -67,32 +70,32 @@ public class Date implements Comparable<Date> {
         if (this.year == date.getYear()){
             if (this.month == date.getMonth()){
                 if (this.day == date.getDay()){
-                    return 0;
+                    return EQUAL_TO;
                 }
                 else {
                     if (this.day < date.getDay()){
-                        return -1;
+                        return LESS_THAN;
                     }
                     else {
-                        return 1;
+                        return GREATER_THAN;
                     }
                 }
             }
             else {
                 if (this.month < date.getMonth()){
-                    return -1;
+                    return LESS_THAN;
                 }
                 else {
-                    return 1;
+                    return GREATER_THAN;
                 }
             }
         }
         else {
             if (this.year < date.getYear()){
-                return -1;
+                return LESS_THAN;
             }
             else {
-                return 1;
+                return GREATER_THAN;
             }
         }
     }

@@ -36,9 +36,22 @@ public class FitnessClass {
             this.hour = hour;
             this.minute = minute;
         }
+
+        /**
+         * Convert an appropriate string into a Time object.
+         * @param time a time in string form, of format "hh:mm".
+         * @return the time object that corresponds to the string.
+         */
         public static Time convertTime(String time) {
-            //TODO: implement
-            return AFTERNOON;
+            if (time == "9:30"){
+                return MORNING;
+            }
+            else if (time == "14:00"){
+                return AFTERNOON;
+            }
+            else {
+                return null;
+            }
         }
     }
 
@@ -101,9 +114,8 @@ public class FitnessClass {
         Member[] checkedList = this.checkedIn;
         for(int i=0; i<checkedList.length; i++) {
             if(checkedList[i] != null) {
-                str += "\n";
-                if(i==0) str += "\t" + "** participants **\n";
-                str += "\t" + "\t" + checkedList[i].toString();
+                if(i==0) str += "\t" + "** participants **";
+                str += "\n" + "\t" + "\t" + checkedList[i].toString();
             }
         }
         return str;
