@@ -9,7 +9,6 @@ public class GymManager {
     private FitnessClass cardio;
     private FitnessClass spinning;
 
-
     /**
      * Default constructor used to instantiate GymManager object.
      */
