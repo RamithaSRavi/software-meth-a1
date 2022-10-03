@@ -35,7 +35,10 @@ public enum Time {
         }
     }
 
-    //TODO: add method comment describing purpose of this method
+    /**
+     * Converts the time object into string format.
+     * @return a string of the time in "hh:mm" format.
+     */
     @Override
     public String toString(){
         switch(this) {

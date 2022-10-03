@@ -46,6 +46,11 @@ public class Member implements Comparable<Member>{
         this.expire = expire;
         this.location = location;
     }
+
+    /**
+     * Turns the member's info into string form.
+     * @return a string of the member's info including their name, DOB, expiration date, and location.
+     */
     @Override
     public String toString() {
         Date currentDate = new Date();
@@ -156,6 +161,7 @@ public class Member implements Comparable<Member>{
      * Testbed main for compareTo() method.
      */
     public static void main(String[] args){
+        //Test Case 1
         Date memberOneDOB = new Date("9/9/1977");
         Date memberTwoDOB = new Date("8/8/1977");
         Member member1 = new Member("Roy", "Brooks", memberOneDOB);
@@ -165,6 +171,7 @@ public class Member implements Comparable<Member>{
         System.out.println("**Test Case 1: Two members with the same first and last names: ");
         testResult(member1, member2, expectedOutput, actualOutput);
 
+        //Test Case 2
         memberOneDOB = new Date("9/9/1977");
         memberTwoDOB = new Date("10/7/1977");
         member1 = new Member("Roy", "Brooks", memberOneDOB);
@@ -174,6 +181,7 @@ public class Member implements Comparable<Member>{
         System.out.println("**Test Case 2: Members should be sorted by last name first: ");
         testResult(member1, member2, expectedOutput, actualOutput);
 
+        //Test Case 3
         memberOneDOB = new Date("10/7/1977");
         memberTwoDOB = new Date("9/9/1977");
         member1 = new Member("Carl", "Brown", memberOneDOB);
@@ -183,6 +191,7 @@ public class Member implements Comparable<Member>{
         System.out.println("**Test Case 3: Members should be sorted by last name first: ");
         testResult(member1, member2, expectedOutput, actualOutput);
 
+        //Test Case 4
         memberOneDOB = new Date("5/1/1996");
         memberTwoDOB = new Date("1/20/2003");
         member1 = new Member("Jane", "Doe", memberOneDOB);
@@ -193,6 +202,7 @@ public class Member implements Comparable<Member>{
                 "they should be sorted alphabetically by first name");
         testResult(member1, member2, expectedOutput, actualOutput);
 
+        //Test Case 5
         memberOneDOB = new Date("1/20/2004");
         memberTwoDOB = new Date("1/20/2003");
         member1 = new Member("John", "Doe", memberOneDOB);
@@ -202,6 +212,7 @@ public class Member implements Comparable<Member>{
         System.out.println("**Test Case 5: Two members with the same first name and last name: ");
         testResult(member1, member2, expectedOutput, actualOutput);
 
+        //Test Case 6
         memberOneDOB = new Date("2/29/2000");
         memberTwoDOB = new Date("9/9/1997");
         member1 = new Member("Duke", "Ellington", memberOneDOB);
@@ -211,6 +222,7 @@ public class Member implements Comparable<Member>{
         System.out.println("**Test Case 6: Members should be sorted by last name: ");
         testResult(member1, member2, expectedOutput, actualOutput);
 
+        //Test Case 7
         memberOneDOB = new Date("7/15/1977");
         memberTwoDOB = new Date("2/29/2000");
         member1 = new Member("Kate", "Lindsey", memberOneDOB);
@@ -220,6 +232,7 @@ public class Member implements Comparable<Member>{
         System.out.println("**Test Case 7: Members should be sorted by last name: ");
         testResult(member1, member2, expectedOutput, actualOutput);
 
+        //Test Case 8
         memberOneDOB = new Date("7/15/1997");
         memberTwoDOB = new Date("12/1/1989");
         member1 = new Member("Kate", "Lindsey", memberOneDOB);
@@ -230,6 +243,7 @@ public class Member implements Comparable<Member>{
                 "they should be sorted alphabetically by first name");
         testResult(member1, member2, expectedOutput, actualOutput);
 
+        //Test Case 9
         memberOneDOB = new Date("12/1/1989");
         memberTwoDOB = new Date("7/15/1997");
         member1 = new Member("Mary", "Lindsey", memberOneDOB);
@@ -240,6 +254,7 @@ public class Member implements Comparable<Member>{
                 "they should be sorted alphabetically by first name");
         testResult(member1, member2, expectedOutput, actualOutput);
 
+        //Test Case 10
         memberOneDOB = new Date("12/1/1989");
         memberTwoDOB = new Date("3/31/1990");
         member1 = new Member("Mary", "Lindsey", memberOneDOB);
@@ -249,6 +264,7 @@ public class Member implements Comparable<Member>{
         System.out.println("**Test Case 10: Members should be sorted by last name: ");
         testResult(member1, member2, expectedOutput, actualOutput);
 
+        //Test Case 11
         memberOneDOB = new Date("3/31/1990");
         memberTwoDOB = new Date("12/1/1989");
         member1 = new Member("April", "March", memberOneDOB);
@@ -258,6 +274,7 @@ public class Member implements Comparable<Member>{
         System.out.println("**Test Case 11: Members should be sorted by last name: ");
         testResult(member1, member2, expectedOutput, actualOutput);
 
+        //Test Case 12
         memberOneDOB = new Date("1/31/2023");
         memberTwoDOB = new Date("3/31/1990");
         member1 = new Member("Bill", "Scanlan", memberOneDOB);
@@ -267,6 +284,7 @@ public class Member implements Comparable<Member>{
         System.out.println("**Test Case 12: Members should be sorted by last name: ");
         testResult(member1, member2, expectedOutput, actualOutput);
 
+        //Test Case 13
         memberOneDOB = new Date("3/31/1990");
         memberTwoDOB = new Date("5/1/1999");
         member1 = new Member("Paul", "Siegel", memberOneDOB);
@@ -277,6 +295,13 @@ public class Member implements Comparable<Member>{
         testResult(member1, member2, expectedOutput, actualOutput);
     }
 
+    /**
+     * Helper method to print results of test cases.
+     * @param member1 the member whose compareTo(Member member) method is used.
+     * @param member2 the member who is a parameter in the compareTo() method.
+     * @param expectedOutput what the comparison result should be.
+     * @param actualOutput what member1.compareTo(member2) actually returns.
+     */
     private static void testResult(Member member1, Member member2, int expectedOutput, int actualOutput){
         System.out.println(member1.getFname() + " " + member1.getLname() + " comparesTo("
                 + member2.getFname() + " " + member2.getLname() + ")");

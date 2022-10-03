@@ -18,6 +18,14 @@ public class GymManager {
         this.spinning = new FitnessClass("SPINNING", "Denise", "14:00");
     }
 
+    /**
+     * Checking if all the dates are valid and make a member eligible.
+     * Make sure all dates are valid dates, and member is > 18.
+     * @param birthDate the birthdate of the member to be added.
+     * @param todayDate the current date.
+     * @param expiryDate the expiration date of the membership.
+     * @return whether the date allows the member to get a membership.
+     */
     private boolean checkDateValidity(Date birthDate, Date todayDate, Date expiryDate) {
         if(!birthDate.isValid()) {
             System.out.println("DOB " + birthDate.toString() + ": invalid calendar date!");
@@ -44,6 +52,12 @@ public class GymManager {
         }
         return true;
     }
+
+    /**
+     * Adds a member to the database.
+     * @param input the input read from the command line.
+     * @param memberDatabase the gym database the member should be added to.
+     */
     private void addToMemberDatabase(StringTokenizer input, MemberDatabase memberDatabase) {
         String fname = input.nextToken();
         String lname = input.nextToken();
@@ -51,7 +65,6 @@ public class GymManager {
         Date todayDate = new Date();
         Date expiryDate =  new Date(input.nextToken());
         if(!checkDateValidity(birthDate, todayDate, expiryDate)) return;
-
         Location cityLoc = null;
         String city = input.nextToken().toUpperCase();
         boolean validCity = false;
@@ -71,12 +84,10 @@ public class GymManager {
             validCity = true;
             cityLoc = Location.FRANKLIN;
         }
-
         if(validCity == false) {
             System.out.println(city + ": invalid location!");
             return;
         }
-
         Member member = new Member(fname, lname, birthDate, expiryDate, cityLoc);
         if(memberDatabase.add(member) == false) {
             System.out.println(fname + " " + lname + " is already in the database.");
@@ -85,6 +96,11 @@ public class GymManager {
         System.out.println(fname + " " + lname + " added.");
     }
 
+    /**
+     * Removes a member from the database.
+     * @param input the input of the member read from the command line.
+     * @param memberDatabase the database to remove the member from.
+     */
     private void removeFromMemberDatabase(StringTokenizer input, MemberDatabase memberDatabase) {
         String fname = input.nextToken();
         String lname = input.nextToken();
@@ -99,6 +115,10 @@ public class GymManager {
         System.out.println(fname + " " + lname + " removed.");
     }
 
+    /**
+     * Prints the members in the gym database.
+     * @param memberDatabase the database to extract the member list from.
+     */
     private void printMembers(MemberDatabase memberDatabase){
         if (memberDatabase.getMlist().length == 4){
             System.out.println("Member database is empty!");
@@ -109,6 +129,10 @@ public class GymManager {
         }
     }
 
+    /**
+     * Prints the members in the gym database sorted by county.
+     * @param memberDatabase the database to extract the member list from.
+     */
     private void printMembersByCounty(MemberDatabase memberDatabase) {
         if (memberDatabase.getMlist().length == 4){
             System.out.println("Member database is empty!");
@@ -119,6 +143,10 @@ public class GymManager {
         }
     }
 
+    /**
+     * Prints the members in the gym database sorted alphabetically by name.
+     * @param memberDatabase the database to extract the member list from.
+     */
     private void printMembersByName(MemberDatabase memberDatabase) {
         if (memberDatabase.getMlist().length == 4){
             System.out.println("Member database is empty!");
@@ -129,6 +157,10 @@ public class GymManager {
         }
     }
 
+    /**
+     * Prints the members in the gym database by expiration date (earliest first).
+     * @param memberDatabase the database to extract the member list from.
+     */
     private void printMembersByExpiryDate(MemberDatabase memberDatabase) {
         if (memberDatabase.getMlist().length == 4){
             System.out.println("Member database is empty!");
@@ -139,6 +171,9 @@ public class GymManager {
         }
     }
 
+    /**
+     * Prints the fitness schedule of the gym, including the instructors, participants, and times for the classes.
+     */
     private void printFitnessSchedule(){
         System.out.println(this.pilates.printSchedule());
         System.out.println(this.spinning.printSchedule());
@@ -146,6 +181,11 @@ public class GymManager {
         System.out.println();
     }
 
+    /**
+     * Checks in a member into a fitness class based on whether the member has a valid membership.
+     * @param input the input read from the command line with the member info.
+     * @param memberDatabase the member database that has all member info, to validate the member.
+     */
     private void checkInMember(StringTokenizer input, MemberDatabase memberDatabase){
         String classType = input.nextToken();
         if(!(classType.toUpperCase().equals(spinning.getClassName()) || classType.toUpperCase().equals(pilates.getClassName()) || classType.toUpperCase().equals(cardio.getClassName()))) {
@@ -177,7 +217,14 @@ public class GymManager {
         checkMemberStatusAndTimeConflictInClass(classType, member, fname, lname);
     }
 
-
+    /**
+     * Checks if a member can be checked into a fitness class based on whether they're checked in already or
+     * if they have a time conflict.
+     * @param classType the class the member is checking into.
+     * @param member the member that is checking in.
+     * @param fname the first name of the member.
+     * @param lname the last name of the member.
+     */
     private void checkMemberStatusAndTimeConflictInClass(String classType, Member member, String fname, String lname){
         switch(classType.toUpperCase()) {
             case "PILATES":
@@ -213,6 +260,13 @@ public class GymManager {
         }
     }
 
+    /**
+     * Checks if a member can be dropped from a class, and then drops the member if possible.
+     * @param classType the class the member wants to be dropped from.
+     * @param member the member to be dropped.
+     * @param fname the first name of the member.
+     * @param lname the last name of the member.
+     */
     private void checkMemberStatusAndDropMember(String classType, Member member, String fname, String lname) {
         switch(classType.toUpperCase()) {
             case "PILATES":
@@ -239,6 +293,10 @@ public class GymManager {
         }
     }
 
+    /**
+     * Drops a member read in from the command line input from a class.
+     * @param input the command line input with the member and class information.
+     */
     private void dropMember(StringTokenizer input) {
         String classType = input.nextToken();
         if(!(classType.toUpperCase().equals(spinning.getClassName()) || classType.toUpperCase().equals(pilates.getClassName()) || classType.toUpperCase().equals(cardio.getClassName()))) {
