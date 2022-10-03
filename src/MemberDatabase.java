@@ -142,8 +142,8 @@ public class MemberDatabase {
         for(int i=0; i< size-1; i++) {
             minimum = i;
             for(int j=i+1; j< size; j++) {
-                Member.Location member2Location = memberList[j].getLocation();
-                Member.Location member1Location = memberList[minimum].getLocation();
+                Location member2Location = memberList[j].getLocation();
+                Location member1Location = memberList[minimum].getLocation();
                 String member1County = member1Location.getCounty();
                 String member2County = member2Location.getCounty();
                 if(member1County.compareTo(member2County) == 0 ) {

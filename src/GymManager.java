@@ -52,24 +52,24 @@ public class GymManager {
         Date expiryDate =  new Date(input.nextToken());
         if(!checkDateValidity(birthDate, todayDate, expiryDate)) return;
 
-        Member.Location cityLoc = null;
+        Location cityLoc = null;
         String city = input.nextToken().toUpperCase();
         boolean validCity = false;
         if (city.equals("PISCATAWAY")){
             validCity = true;
-            cityLoc = Member.Location.PISCATAWAY;
+            cityLoc = Location.PISCATAWAY;
         } else if (city.equals("BRIDGEWATER")){
             validCity = true;
-            cityLoc = Member.Location.BRIDGEWATER;
+            cityLoc = Location.BRIDGEWATER;
         } else if (city.equals("EDISON")){
             validCity = true;
-            cityLoc = Member.Location.EDISON;
+            cityLoc = Location.EDISON;
         } else if (city.equals("SOMERVILLE")){
             validCity = true;
-            cityLoc = Member.Location.SOMERVILLE;
+            cityLoc = Location.SOMERVILLE;
         } else if (city.equals("FRANKLIN")){
             validCity = true;
-            cityLoc = Member.Location.FRANKLIN;
+            cityLoc = Location.FRANKLIN;
         }
 
         if(validCity == false) {
