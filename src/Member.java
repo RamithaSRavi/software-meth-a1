@@ -18,54 +18,6 @@ public class Member implements Comparable<Member>{
     public static final int GREATER_THAN = 1;
     public static final int EQUAL_TO = 0;
 
-    public enum Location {
-        BRIDGEWATER ("08807", "SOMERSET"),
-        EDISON ("08837", "MIDDLESEX"),
-        FRANKLIN ("08873", "SOMERSET"),
-        PISCATAWAY ("08854", "MIDDLESEX"),
-        SOMERVILLE ("08876", "SOMERSET");
-
-        private final String zip;
-        private final String county;
-
-        /**
-         * Gets the county of the Location object.
-         * @return the Location object's county.
-         */
-        public String getCounty(){
-            return this.county;
-        }
-
-        /**
-         * Gets the zip of the Location object.
-         * @return the Location object's zip.
-         */
-        public String getZip(){
-            return this.zip;
-        }
-
-        Location(String zip, String county) {
-            this.zip = zip;
-            this.county = county.toUpperCase();
-        }
-
-        /**
-         * Converts the location to string form.
-         * @return the location in string form, with city, zip code, and county.
-         */
-        @Override
-        public String toString(){
-            switch(this) {
-                case BRIDGEWATER: return "BRIDGEWATER, " + this.zip + ", " + this.county;
-                case EDISON: return "EDISON, " + this.zip + ", " + this.county;
-                case FRANKLIN: return "FRANKLIN, " + this.zip + ", " + this.county;
-                case PISCATAWAY: return "PISCATAWAY, " + this.zip + ", " + this.county;
-                case SOMERVILLE: return "SOMERVILLE, " + this.zip + ", " + this.county;
-                default: return null;
-            }
-        }
-    }
-
     /**
      * Parameterized constructor used to instantiate a Member object.
      * The first name, last name, and date of birth are sufficient to uniquely identify a member.
