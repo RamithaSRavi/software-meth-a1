@@ -256,7 +256,6 @@ public class GymManager {
                 }
                 this.cardio.checkIn(member);
                 System.out.println(fname + " " + lname + " checked in Cardio.");
-                break;
         }
     }
 
@@ -315,6 +314,46 @@ public class GymManager {
         checkMemberStatusAndDropMember(classType, member, fname, lname);
     }
 
+    private boolean readCommand(StringTokenizer input, MemberDatabase memberDatabase, boolean runProgram, String command) {
+        switch (command) {
+            case "A":
+                addToMemberDatabase(input, memberDatabase);
+                break;
+            case "R":
+                removeFromMemberDatabase(input, memberDatabase);
+                break;
+            case "P":
+                printMembers(memberDatabase);
+                break;
+            case "PC":
+                printMembersByCounty(memberDatabase);
+                break;
+            case "PN":
+                printMembersByName(memberDatabase);
+                break;
+            case "PD":
+                printMembersByExpiryDate(memberDatabase);
+                break;
+            case "S":
+                printFitnessSchedule();
+                break;
+            case "C":
+                checkInMember(input, memberDatabase);
+                break;
+            case "D":
+                dropMember(input);
+                break;
+            case "Q":
+                System.out.println("Gym Manager terminated.");
+                runProgram = false;
+                break;
+            default:
+                System.out.println(command + " is an invalid command!");
+        }
+        if(runProgram) return true;
+        else return false;
+    }
+
     /**
      * Continuously read user's command lines and terminate when user inputs "Q".
      */
@@ -331,41 +370,10 @@ public class GymManager {
             }
             StringTokenizer input = new StringTokenizer(line, " ");
             String command = input.nextToken();
-            switch (command) {
-                case "A":
-                    addToMemberDatabase(input, memberDatabase);
-                    break;
-                case "R":
-                    removeFromMemberDatabase(input, memberDatabase);
-                    break;
-                case "P":
-                    printMembers(memberDatabase);
-                    break;
-                case "PC":
-                    printMembersByCounty(memberDatabase);
-                    break;
-                case "PN":
-                    printMembersByName(memberDatabase);
-                    break;
-                case "PD":
-                    printMembersByExpiryDate(memberDatabase);
-                    break;
-                case "S":
-                    printFitnessSchedule();
-                    break;
-                case "C":
-                    checkInMember(input, memberDatabase);
-                    break;
-                case "D":
-                    dropMember(input);
-                    break;
-                case "Q":
-                    System.out.println("Gym Manager terminated.");
-                    runProgram = false;
-                    System.exit(0);
-                default:
-                    System.out.println(command + " is an invalid command!");
-                    break;
+
+            if(!readCommand(input, memberDatabase, runProgram, command)) {
+                runProgram = false;
+                System.exit(0);
             }
         }
     }
