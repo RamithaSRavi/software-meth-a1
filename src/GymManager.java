@@ -175,6 +175,7 @@ public class GymManager {
      * Prints the fitness schedule of the gym, including the instructors, participants, and times for the classes.
      */
     private void printFitnessSchedule(){
+        System.out.println("\n--Fitness Classes--");
         System.out.println(this.pilates.printSchedule());
         System.out.println(this.spinning.printSchedule());
         System.out.println(this.cardio.printSchedule());
@@ -275,6 +276,7 @@ public class GymManager {
                 } else {
                     System.out.println(fname + " " + lname + " is not a participant in Pilates.");
                 }
+                break;
             case "SPINNING":
                 if(this.spinning.checkMemberStatus(member)) {
                     this.spinning.dropClass(member);
@@ -282,6 +284,7 @@ public class GymManager {
                 } else {
                     System.out.println(fname + " " + lname + " is not a participant in Spinning.");
                 }
+                break;
             case "CARDIO":
                 if(this.cardio.checkMemberStatus(member)) {
                     this.cardio.dropClass(member);
@@ -289,6 +292,7 @@ public class GymManager {
                 } else {
                     System.out.println(fname + " " + lname + " is not a participant in Cardio.");
                 }
+                break;
         }
     }
 
@@ -367,6 +371,7 @@ public class GymManager {
             String line = sc.nextLine();
             if (line.isEmpty()){
                 System.out.println();
+                continue;
             }
             StringTokenizer input = new StringTokenizer(line, " ");
             String command = input.nextToken();
