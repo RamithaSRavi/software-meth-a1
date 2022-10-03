@@ -2,7 +2,6 @@
  * The class that defines a fitness class the members can check in.
  * @author Ramitha Ravishankar, Gloria Liu
  */
-
 public class FitnessClass {
     private String className;
     private String instructor;

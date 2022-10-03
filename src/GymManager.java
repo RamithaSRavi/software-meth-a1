@@ -318,6 +318,14 @@ public class GymManager {
         checkMemberStatusAndDropMember(classType, member, fname, lname);
     }
 
+    /**
+     * Reads the first character of the command line and calls respective method to perform operation.
+     * @param input StringTokenizer for the command string
+     * @param memberDatabase the member database that has all existing member info
+     * @param runProgram status of program, true if user has not entered "Q", else false
+     * @param command user's command in the terminal
+     * @return
+     */
     private boolean readCommand(StringTokenizer input, MemberDatabase memberDatabase, boolean runProgram, String command) {
         switch (command) {
             case "A":

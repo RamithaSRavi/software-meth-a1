@@ -2,7 +2,6 @@
  * The class that stores and organizes all gym member data.
  * @author Ramitha Ravishankar, Gloria Liu
  */
-
 public class MemberDatabase {
     private Member [] mlist;
     private int size;
