@@ -438,6 +438,12 @@ public class Date implements Comparable<Date> {
         testResult(date, expectedOutput, actualOutput);
     }
 
+    /**
+     * Helper method to print the results of the tests.
+     * @param date the date that is being checked for validity.
+     * @param expectedOutput whether the date should be valid or not.
+     * @param actualOutput what the isValid() method returned.
+     */
     private static void testResult(Date date, boolean expectedOutput, boolean actualOutput){
         System.out.println(date.toString());
         System.out.println("isValid() returns " + actualOutput + ",");
