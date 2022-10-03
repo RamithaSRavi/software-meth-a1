@@ -14,9 +14,11 @@ public class FitnessClass {
      * Parameterized constructor used to instantiate a FitnessClass object.
      * @param cName name of the fitness class.
      */
-    public FitnessClass(String cName) {
-        this.checkedIn = new Member[4];
+    public FitnessClass(String cName, String instructor, String classTime) {
         this.className = cName;
+        this.instructor = instructor.toUpperCase();
+        this.classTime = Time.convertTime(classTime);
+        this.checkedIn = new Member[4];
     }
 
     /**
@@ -51,6 +53,15 @@ public class FitnessClass {
             }
             else {
                 return null;
+            }
+        }
+
+        @Override
+        public String toString(){
+            switch(this) {
+                case MORNING: return "9:30";
+                case AFTERNOON: return "14:00";
+                default: return null;
             }
         }
     }
@@ -110,11 +121,15 @@ public class FitnessClass {
      * @return String
      */
     public String printSchedule() {
-        String str = "";
+        String str = this.className.charAt(0) + this.className.toLowerCase().substring(1);
+        str += " - " + this.instructor + " " + this.classTime.toString();
         Member[] checkedList = this.checkedIn;
         for(int i=0; i<checkedList.length; i++) {
+            if (checkedList[0] == null){
+                return str;
+            }
             if(checkedList[i] != null) {
-                if(i==0) str += "\t" + "** participants **";
+                if(i==0) str += "\n\t" + "** participants **";
                 str += "\n" + "\t" + "\t" + checkedList[i].toString();
             }
         }
